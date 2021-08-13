@@ -1,2 +1,2 @@
-# mockup-photoshop-api
-From logo, generate mockup based on photo psds and AWS S3 bucket
+sb-rfs9i7143143@business.example.com
+VZ3n@t95

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<body>
+    <div id="loading" class="position-absolute w-100 h-100">
+        <div class="loading">
+            <img src="/images/LoadingIcon.gif" style="width: 200px; height: 200px; z-index: 10;" alt="">
+            <div class="loading-back"></div>
+        </div>
+    </div>
+    
+    <%- include('header.ejs') %>
+
+    <div class="container text-center position-relative">
+
+        <h1 class="mt-3" style="font-size: 5rem">Upload</h1>
+        <h1 style="font-size: 5rem">Your</h1>
+        <h1 style="font-size: 5rem">Logo</h1>
+        <h1 style="font-size: 5rem">Here</h1>
+        <h6>(PNG Transparent Background)</h6>
+
+        <form action="/" method="post" enctype="multipart/form-data">
+            <label for="file-upload" class="custom-file-upload">
+                <i class="fa fa-cloud-upload"></i> Upload Image
+            </label>
+            <input type="file" name="cashbackfiles" id="file-upload" class="mt-2" multiple />
+            <div id="file-name">&nbsp;</div>
+            <div>
+                <button class="btn rounded-pill mt-5 btn-mockup inner-border" type="submit">
+                    <i class="fas fa-angle-double-right text-white"></i>
+                    Create Mockups
+                </button>
+            </div>
+        </form>
+
+        <div class="mt-1">
+            <a href="/display">
+                GOTO DISPLAY
+            </a>
+        </div>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('#file-upload').change(function () {
+            var i = $(this).prev('label').clone();
+            var file = $('#file-upload')[0].files[0].name;
+            $("#file-name").text(file);
+        });
+        $(".btn-mockup").click(function () {
+            $("#loading").show();
+        })
+    });
+
+</script>
+
+<style>
+    input[type="file"] {
+        display: none;
+    }
+
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+
+    .btn-mockup {
+        margin: auto;
+        display: block;
+        border-width: 5px;
+        background-color: #4AB8DF;
+    }
+
+    .inner-border {
+        box-shadow: inset 0px 0px 0px 3px white;
+        box-sizing: border-box;
+    }
+
+    
+</style>
+
+</html>

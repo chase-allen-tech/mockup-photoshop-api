@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<body>
+
+    <div id="loading" class="position-absolute w-100 h-100">
+        <div class="loading">
+            <img src="/images/LoadingIcon.gif" style="width: 200px; height: 200px; z-index: 10;" alt="">
+            <div class="loading-back"></div>
+        </div>
+    </div>
+
+    <% if(!sourceUrl) { %>
+    <div class="d-flex justify-content-center align-items-center w-100 h-100 position-absolute">
+        <h1>Time expired. Rebuild please...</h1>
+    </div>
+    <% } %>
+
+    <%- include('header.ejs') %>
+
+
+    <div class="container">
+
+        <div class="row">
+            <% if(sourceUrl) { %>
+
+            <div class="col-md-12 text-center mt-2">
+                <div>
+                    <img class="img-thumbnail" width="300px" src="<%- sourceUrl %>" alt="My_Logo">
+                </div>
+                <div class="download-all float-right">
+                    <button class="btn btn-primary" onclick="onDownloadAll()">Download All</button>
+                </div>
+            </div>
+
+            <% } %>
+
+            <% for (var i = 0; i < outputUrls.length; i++) { %>
+            <div class="col-md-3 p-2 text-center">
+                <div class="parent">
+                    <div class="child img-thumbnail">
+                        <img class=" w-100 h-100 img-src" src="<%- outputUrls[i] %>" alt="My_Logo">
+                    </div>
+                </div>
+                <a href="#" data-id="<%- i + 1 %>" onClick='onDownload(this)'>DOWNLOAD</a>
+            </div>
+            <% } %>
+
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    const onDownloadAll = async () => {
+        $("#loading").show();
+        $.ajax('http://localhost:3000/paypal/transfer', {
+            type: "POST",
+            data: { id: 0, isAll: true },
+            success: function (data, status, xhr) {
+                $("#loading").hide();
+                if (data.success) {
+                    window.open(data.link, '_blank')
+                }
+            },
+            error: function (xhr, status, error) {
+                $("#loading").hide();
+                console.log('[error]', error);
+            }
+        });
+    }
+
+    const onDownload = async (elem) => {
+        $("#loading").show();
+        $.ajax('http://localhost:3000/paypal/transfer', {
+            type: "POST",
+            data: { id: elem.getAttribute('data-id'), isAll: false },
+            success: function (data, status, xhr) {
+                $("#loading").hide();
+                if (data.success) {
+                    window.open(data.link, '_blank')
+                }
+            },
+            error: function (xhr, status, error) {
+                $("#loading").hide();
+                console.log('[error]', error);
+            }
+        });
+    }
+</script>
+
+<style>
+    body {
+        background-color: #F5F5F5;
+    }
+    .parent {
+        position: relative;
+        width: 100%;
+    }
+
+    .child {
+        position: relative;
+        padding-bottom: calc(100% * 4 / 5);
+        overflow: hidden;
+        border-width: 6px;
+        border-color: #ccc;
+        box-shadow: 3px 3px 3px grey;
+    }
+
+    .child>img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .child:hover {
+        opacity: 0.7;
+        transition: all 0.5s;
+    }
+
+    .child:hover .img-src{
+        transform: scale(1.2);
+    }
+
+    .img-src {
+        transition: all 0.5s;
+    }
+
+</style>
+
+</html>

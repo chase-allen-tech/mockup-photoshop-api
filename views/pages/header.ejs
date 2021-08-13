@@ -1,0 +1,53 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<nav class="navbar navbar-expand-sm navbar-light" style="background-color: #4AB8DF;">
+    <ul class="navbar-nav w-100">
+        <li class="nav-item active">
+            <a class="nav-link text-black-50 font-weight-bolder" href="/" style="font-size: 24px;">LOGO</a>
+        </li>
+        <li class="nav-item ml-auto">
+            <a class="nav-link text-black-50 font-weight-bolder" href="#" style="font-size: 20px;">My Account</a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    html, body {
+        height: 100%;
+        width: 100%
+    }
+    #loading {
+        display: none;
+    }
+
+    .loading {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* display: none; */
+    }
+
+    .loading-back {
+        background-color: grey;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+        z-index: 5;
+        backdrop-filter: blur(20px);
+    }
+</style>

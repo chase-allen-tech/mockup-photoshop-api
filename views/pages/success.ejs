@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<body>
+
+    <%- include('header.ejs') %>
+    <div class="container text-center">
+        <h1 style="margin-top: 100px;">Successfully Paid</h1>
+    </div>
+
+    <div>
+        <% for (var i = 0; i < outputLargeUrls.length; i++) { %>
+        <a class="download-all" data-href="<%- outputLargeUrls[i] %>" download="1.png"></a>
+        <% } %>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        let allTags = $(".download-all");
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function downloadAll(urls) {
+            var link = document.createElement('a');
+
+            link.setAttribute('download', 'logo.png');
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            for (var i = 0; i < urls.length; i++) {
+                link.setAttribute('href', urls[i]);
+                link.click();
+                await sleep(2000);
+            }
+            document.body.removeChild(link);
+        }
+
+        if (allTags && allTags.length) {
+            let urls = [];
+            for (let tag of allTags) {
+                urls.push(tag.getAttribute('data-href'));
+            }
+            console.log('[captured urls]', urls);
+            downloadAll(urls);
+        }
+    });
+</script>
+
+<style>
+    
+</style>
